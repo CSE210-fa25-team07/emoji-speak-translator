@@ -1,0 +1,12 @@
+{
+  "name": "emoji-translator-webapp",
+  "version": "1.0.0",
+  "description": "A vanilla emoji translator webapp with CI/CD testing",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
+
