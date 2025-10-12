@@ -1,6 +1,6 @@
 function translate(text) {
   return text
-    .replace(/\bhappy\b/gi, "😊")
+    .replace(/\bhapp\b/gi, "😊")
     .replace(/\bsad\b/gi, "😢")
     .replace(/\blove\b/gi, "❤️");
 }
