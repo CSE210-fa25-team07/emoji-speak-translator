@@ -23,11 +23,11 @@ npm -v
 ```sh
 npm ci
 ```
-npm ci installs exact versions from package-lock.json.
+`npm ci` installs exact versions from `package-lock.json`.
 
 A node_modules/ folder should be created locally.
 ### Testing
-Run `npm test`. Below is an example output with basic tests
+Run `npm test`. Below is an example output with basic tests.
 ```sh
 npm test
 
