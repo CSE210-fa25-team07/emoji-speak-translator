@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Emoji Translator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="title">
+      Emoji Translator
+      <span class="emoji">😀</span>
+    </div>
+
+    <div class="reverse-wrap">
+      <button class="reverse" title="Swap sides">Reverse</button>
+    </div>
+
+    <div class="panels" role="region">
+      <div class="panel" id="leftPanel">
+        <div class="placeholder">Enter your text here</div>
+        <textarea id="inputText" rows="6"></textarea>
+      </div>
+
+      <div class="panel inactive" id="rightPanel">
+        <div class="placeholder">Enter your emoji here</div>
+        <textarea id="inputEmoji" rows="6" readonly=""></textarea>
+      </div>
+    </div>
+
+    <div class="labels">
+      <div class="label left" id="labelLeft">Text</div>
+      <div class="label right" id="labelRight">Emoji</div>
+    </div>
+  </div>
+  <script src="frontend_script.js"></script>
+</body>
+</html>
