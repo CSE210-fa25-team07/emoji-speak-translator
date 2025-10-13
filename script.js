@@ -1,46 +1,37 @@
-// Emoji dictionary - inline for browser, or require for Node.js
+// Emoji dictionary - will be loaded from dict.json
 let emojiDict = {};
 let wordToEmojiDict = {};
 
 // For Node.js environment
 if (typeof require !== 'undefined' && typeof window === 'undefined') {
     emojiDict = require('./dict.json');
+    // Create reverse mapping for word to emoji
+    for (const emoji in emojiDict) {
+        const word = emojiDict[emoji];
+        wordToEmojiDict[word.toLowerCase()] = emoji;
+    }
 } else {
-    // For browser - inline dictionary from dict.json
-    emojiDict = {
-        "😀": "polite", "😃": "smile", "😄": "enthusiasm", "😁": "grin",
-        "😆": "laughing", "😂": "lmao", "🤣": "rofl", "😊": "ok",
-        "🙂": "sure", "🙃": "sarcastic", "😉": "flirty", "😌": "smug",
-        "😍": "obsessed", "🥰": "love", "😘": "kiss", "😅": "oops",
-        "🤓": "nerd", "😎": "cool", "🤩": "wow", "🥳": "celebrate",
-        "😤": "confidence", "😭": "crying", "😢": "tear", "😩": "tired",
-        "🥺": "please", "😡": "mad", "🤬": "rage", "🤯": "mind blown",
-        "😱": "shocked", "😴": "asleep", "🤔": "hmm", "🙄": "annoyed",
-        "😇": "innocent", "💀": "dead'", "☠️": "skull", "🤡": "embarrassing",
-        "🫠": "melting", "🫡": "respect", "🤝": "agreement", "👏": "emphasis",
-        "🙏": "please", "💅": "unbothered", "🔥": "fire", "💯": "facts",
-        "💪": "strong", "👀": "watching", "👋": "bye", "🤷": "indifferent",
-        "🤦": "facepalm", "😐": "unamused", "😶": "speechless", "😬": "awkward",
-        "🤪": "unhinged", "🥴": "chaotic", "🤨": "suspicious", "😔": "resigned",
-        "😞": "disappointed", "🫤": "uncertain", "❤️": "love", "🩷": "affection",
-        "💔": "heartbroken", "💖": "sparkly", "✨": "aesthetic", "🌟": "special",
-        "🌈": "rainbow", "☀️": "sun", "🌙": "moon", "⭐": "star",
-        "💫": "magical", "🌍": "earth", "🌸": "flower", "🌹": "romantic",
-        "🌻": "sunflower", "🌺": "tropical", "🍀": "lucky", "🍕": "fun",
-        "🍿": "popcorns", "☕": "tea", "🍵": "calm", "🍷": "chill",
-        "🥂": "cheers", "🎉": "yay", "🎂": "birthday", "🎁": "gift",
-        "🎶": "music", "🎤": "mic", "🎨": "creative", "📚": "studying",
-        "💻": "online", "📱": "phone", "⚙️": "mechanism", "🧠": "big brain",
-        "🤖": "robotic", "🪩": "party", "💃": "dancing", "🕺": "vibing",
-        "👑": "royalty", "👻": "spooky", "👽": "weird", "🤠": "yee-haw",
-        "🚀": "hyped", "🧍": "standing", "🧎": "defeat"
-    };
-}
+    // For browser - load dictionary from dict.json
+    // Use synchronous XMLHttpRequest (works with file:// protocol)
+    try {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'dict.json', false); // false makes it synchronous
+        xhr.send(null);
 
-// Create reverse mapping for word to emoji
-for (const emoji in emojiDict) {
-    const word = emojiDict[emoji];
-    wordToEmojiDict[word.toLowerCase()] = emoji;
+        if (xhr.status === 200 || xhr.status === 0) { // status 0 for file:// protocol
+            emojiDict = JSON.parse(xhr.responseText);
+            // Create reverse mapping for word to emoji
+            for (const emoji in emojiDict) {
+                const word = emojiDict[emoji];
+                wordToEmojiDict[word.toLowerCase()] = emoji;
+            }
+            console.log('Dictionary loaded successfully:', Object.keys(emojiDict).length, 'emojis');
+        } else {
+            console.error('Failed to load dictionary. Status:', xhr.status);
+        }
+    } catch (error) {
+        console.error('Error loading dictionary:', error);
+    }
 }
 
 function translate(text, mode = 'toEmoji') {
