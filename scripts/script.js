@@ -4,7 +4,7 @@ let wordToEmojiDict = {};
 
 // For Node.js environment
 if (typeof require !== 'undefined' && typeof window === 'undefined') {
-    emojiDict = require('./dict.json');
+    emojiDict = require('../dict.json');
     // Create reverse mapping for word to emoji
     for (const emoji in emojiDict) {
         const word = emojiDict[emoji];
