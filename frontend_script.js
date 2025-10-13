@@ -24,12 +24,11 @@ function updatePlaceholderState(){
 
     let outputText;
     if (!reversed) {
-        outputText = translate(inputText);
-        
+        outputText = translate(inputText, 'toEmoji');
+
     }
     else {
-        // TODO[bukhradze]: implement emoji to text translation
-        outputText = inputText;
+        outputText = translate(inputText, 'toWord');
     }
 
     activeOutput.value = outputText;
