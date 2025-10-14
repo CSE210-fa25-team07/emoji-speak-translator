@@ -1,4 +1,4 @@
-const { translate } = require('../backend/translator.js');
+const { translate } = require('../scripts/script.js');
 
 test('translates a single word', () => {
   expect(translate('polite', 'toEmoji')).toBe('😀');

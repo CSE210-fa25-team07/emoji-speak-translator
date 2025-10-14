@@ -1,6 +1,38 @@
 # Emoji Speak Translator WebApp
 Aggregated components for the Emoji Speak Translator WebApp
 
+## Running the Web Application
+
+To run the web application locally, you need to start a local HTTP server (the app won't work when opened directly as a file due to CORS restrictions).
+
+### Option 1: Using Python (Recommended)
+If you have Python installed, run:
+```sh
+python3 -m http.server 8080
+```
+
+Then open your browser and navigate to:
+```
+http://localhost:8080
+```
+
+### Option 2: Using Node.js
+If you prefer Node.js, you can install and use `http-server`:
+```sh
+npm install -g http-server
+http-server -p 8080
+```
+
+Then open your browser and navigate to:
+```
+http://localhost:8080
+```
+
+### Using the Translator
+- Type words in the **Text** box to see them translated to emojis
+- Click the **Reverse** button to switch modes and translate emojis back to words
+- The dictionary contains 104+ emoji mappings
+
 ## Testing Locally
 To test your changes locally, we use [Node.js](https://nodejs.org/en). 
 
