@@ -5,6 +5,7 @@
       --muted: #bfbfbf;        /* placeholder / muted text */
       --shadow: 0 12px 32px rgba(143,79,42,0.06);
       --radius: 64px;
+      --near-limit: #c26262;
     }
 
 html,body{
@@ -114,6 +115,16 @@ html,body{
     font-weight:500;
 }
 
+.panel .characterCounter {
+    position:absolute;
+    padding:200px 500px;
+    pointer-events:none;
+    color:var(--muted);
+    font-size:20px;
+    font-weight:500;
+    text-align:end;
+}
+
 /* labels under panels */
 .labels {
     display:flex;
@@ -155,6 +166,11 @@ html,body{
 .panel.has-content .placeholder { display:none; }
 .panel.focused .placeholder { display:none; }
 .panel.inactive .placeholder { display:none; }
+.panel.inactive .characterCounter { display:none; }
+
+.panel .characterCounter.near-limit {
+    color:var(--near-limit);
+}
 
 /* subtle inner highlight */
 .panel::after{
