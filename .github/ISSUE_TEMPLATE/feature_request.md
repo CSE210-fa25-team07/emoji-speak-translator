@@ -1,4 +1,11 @@
-# Feature Request
+---
+name: Feature request
+about: Suggest an idea for this project
+title: "[FEATURE]"
+labels: ''
+assignees: ''
+
+---
 
 ### Summary
 Provide a short and clear summary of the feature or improvement you’re proposing.
@@ -17,3 +24,6 @@ Include details such as:
 ### Additional Context
 Add any other context, screenshots, references, or discussions that could help clarify the feature.
 
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
