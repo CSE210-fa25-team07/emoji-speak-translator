@@ -1,7 +1,7 @@
 // Emoji dictionaries - will be loaded from data/ directory
 let emojiDict = {};
 let wordToEmojiDict = {};
-let currentMode = 'general'; // Track current mode
+// let currentMode = 'general'; // Track current mode
 
 // For Node.js environment
 if (typeof require !== 'undefined' && typeof window === 'undefined') {
@@ -33,7 +33,7 @@ function loadDictionary(mode) {
                 const word = emojiDict[emoji];
                 wordToEmojiDict[word.toLowerCase()] = emoji;
             }
-            currentMode = mode;
+            //currentMode = mode;
             console.log(`Dictionary loaded (${mode}):`, Object.keys(emojiDict).length, 'emojis');
             return true;
         } else {
@@ -46,19 +46,23 @@ function loadDictionary(mode) {
     }
 }
 
-function translate(text, mode = 'toEmoji') {
-    if (mode === 'toEmoji') {
-        return text
-            .split(/\s+/)
-            .map(word => wordToEmojiDict[word.toLowerCase()] || word)
-            .join(' ');
-    } else if (mode === 'toWord') {
-        return text
-            .split(/\s+/)
-            .map(token => emojiDict[token] || token)
-            .join(' ');
+function translate(text, direction = 'toEmoji') {
+    if (direction === 'toEmoji') {
+        // Find all sequences of alphabetic characters globally (/g) and case-insensitively (/i)
+        // and run the replace callback on each match.
+        return text.replace(/[a-z]+/gi, (word) => {
+            return wordToEmojiDict[word.toLowerCase()] || word;
+        });
+    } else if (direction === 'toWord') {
+        // We build a RegEx from the keys of the emoji dictionary.
+        // This creates a pattern like /😀|🌎|👩‍👩‍👧‍👦/g
+        const emojiRegex = new RegExp(Object.keys(emojiDict).join('|'), 'g');
+
+        return text.replace(emojiRegex, (emoji) => {
+            return emojiDict[emoji];
+        });
     } else {
-        throw new Error('Invalid mode. Use "toEmoji" or "toWord".');
+        throw new Error('Invalid . Use "toEmoji" or "toWord".');
     }
 }
 
