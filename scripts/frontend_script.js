@@ -8,6 +8,8 @@ const labelRight = document.getElementById('labelRight');
 ta.value = '';
 let reversed = false;
 
+const characterLimit = 200;
+
 function updatePlaceholderState(){
     let activeInput = !reversed ? ta : te;
     let activeOutput = !reversed? te : ta;
@@ -18,6 +20,19 @@ function updatePlaceholderState(){
     } 
     else {
         activePanel.classList.remove('has-content');
+    }
+
+    if (activeInput.value.length > characterLimit) {
+        activeInput.value = activeInput.value.slice(0, characterLimit);
+    }
+
+    var characterCounter = activePanel.getElementsByClassName('characterCounter')[0];
+    characterCounter.innerHTML = characterLimit - activeInput.value.length;
+    if (characterLimit - activeInput.value.length < 20) {
+        characterCounter.classList.add('near-limit');
+    }
+    else {
+        characterCounter.classList.remove('near-limit');
     }
 
     const inputText = activeInput.value;
