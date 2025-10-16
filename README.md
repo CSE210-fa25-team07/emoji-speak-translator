@@ -1,12 +1,6 @@
 # Emoji Speak Translator WebApp
 Aggregated components for the Emoji Speak Translator WebApp
 
-## Live Demo
-
-🌐 **[Try it now on GitHub Pages!](https://cse210-fa25-team07.github.io/emoji-speak-translator/)**
-
-The app is automatically deployed from the `main` branch using GitHub Actions.
-
 ## Running the Web Application
 
 To run the web application locally, you need to start a local HTTP server (the app won't work when opened directly as a file due to CORS restrictions).

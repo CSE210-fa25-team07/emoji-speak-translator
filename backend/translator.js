@@ -1,4 +1,4 @@
-const emojiDict = require('../data/dict.json');
+const emojiDict = require('../dict.json');
 
 // Create a reverse dictionary for word to emoji mapping
 const wordToEmojiDict = {};

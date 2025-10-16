@@ -1,7 +1,6 @@
-// Emoji dictionaries - will be loaded from data/ directory
+// Emoji dictionary - will be loaded from dict.json
 let emojiDict = {};
 let wordToEmojiDict = {};
-let currentMode = 'general'; // Track current mode
 
 // For Node.js environment
 if (typeof require !== 'undefined' && typeof window === 'undefined') {
@@ -12,14 +11,8 @@ if (typeof require !== 'undefined' && typeof window === 'undefined') {
         wordToEmojiDict[word.toLowerCase()] = emoji;
     }
 } else {
-    // For browser - load dictionary based on mode
-    loadDictionary('general');
-}
-
-// Function to load dictionary dynamically
-function loadDictionary(mode) {
-    const dictPath = mode === 'slang' ? 'data/dict-slang.json' : 'data/dict.json';
-
+    // For browser - load dictionary from dict.json
+    // Use synchronous XMLHttpRequest (works with file:// protocol)
     try {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'data/dict.json', false); // false makes it synchronous
@@ -28,21 +21,16 @@ function loadDictionary(mode) {
         if (xhr.status === 200 || xhr.status === 0) { // status 0 for file:// protocol
             emojiDict = JSON.parse(xhr.responseText);
             // Create reverse mapping for word to emoji
-            wordToEmojiDict = {};
             for (const emoji in emojiDict) {
                 const word = emojiDict[emoji];
                 wordToEmojiDict[word.toLowerCase()] = emoji;
             }
-            currentMode = mode;
-            console.log(`Dictionary loaded (${mode}):`, Object.keys(emojiDict).length, 'emojis');
-            return true;
+            console.log('Dictionary loaded successfully:', Object.keys(emojiDict).length, 'emojis');
         } else {
             console.error('Failed to load dictionary. Status:', xhr.status);
-            return false;
         }
     } catch (error) {
         console.error('Error loading dictionary:', error);
-        return false;
     }
 }
 

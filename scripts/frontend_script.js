@@ -4,7 +4,6 @@ const leftPanel = document.getElementById('leftPanel');
 const rightPanel = document.getElementById('rightPanel');
 const labelLeft = document.getElementById('labelLeft');
 const labelRight = document.getElementById('labelRight');
-const modeSelector = document.getElementById('mode');
 
 ta.value = '';
 let reversed = false;
@@ -68,19 +67,6 @@ function removeFocus() {
 ta.addEventListener('input', updatePlaceholderState);
 te.addEventListener('input', updatePlaceholderState);
 updatePlaceholderState();
-
-// Mode selector event listener
-modeSelector.addEventListener('change', (event) => {
-    const selectedMode = event.target.value;
-    console.log('Mode changed to:', selectedMode);
-
-    // Load the appropriate dictionary
-    if (typeof loadDictionary === 'function') {
-        loadDictionary(selectedMode);
-        // Re-translate current text with new dictionary
-        updatePlaceholderState();
-    }
-});
 
 const reverseBtn = document.querySelector('.reverse');
 reverseBtn.addEventListener('click', () => {
