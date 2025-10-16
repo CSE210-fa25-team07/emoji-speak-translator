@@ -4,7 +4,7 @@ let wordToEmojiDict = {};
 
 // For Node.js environment
 if (typeof require !== 'undefined' && typeof window === 'undefined') {
-    emojiDict = require('../dict.json');
+    emojiDict = require('../data/dict.json');
     // Create reverse mapping for word to emoji
     for (const emoji in emojiDict) {
         const word = emojiDict[emoji];
@@ -15,7 +15,7 @@ if (typeof require !== 'undefined' && typeof window === 'undefined') {
     // Use synchronous XMLHttpRequest (works with file:// protocol)
     try {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'dict.json', false); // false makes it synchronous
+        xhr.open('GET', 'data/dict.json', false); // false makes it synchronous
         xhr.send(null);
 
         if (xhr.status === 200 || xhr.status === 0) { // status 0 for file:// protocol
