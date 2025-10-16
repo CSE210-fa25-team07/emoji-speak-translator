@@ -62,7 +62,7 @@ function translate(text, direction = 'toEmoji') {
             return emojiDict[emoji];
         });
     } else {
-        throw new Error('Invalid . Use "toEmoji" or "toWord".');
+        throw new Error(/Invalid mode/);
     }
 }
 
