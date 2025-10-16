@@ -1,36 +1,48 @@
-// Emoji dictionary - will be loaded from dict.json
+// Emoji dictionaries - will be loaded from data/ directory
 let emojiDict = {};
 let wordToEmojiDict = {};
+let currentMode = 'general'; // Track current mode
 
 // For Node.js environment
 if (typeof require !== 'undefined' && typeof window === 'undefined') {
-    emojiDict = require('../dict.json');
+    emojiDict = require('../data/dict.json');
     // Create reverse mapping for word to emoji
     for (const emoji in emojiDict) {
         const word = emojiDict[emoji];
         wordToEmojiDict[word.toLowerCase()] = emoji;
     }
 } else {
-    // For browser - load dictionary from dict.json
-    // Use synchronous XMLHttpRequest (works with file:// protocol)
+    // For browser - load dictionary based on mode
+    loadDictionary('general');
+}
+
+// Function to load dictionary dynamically
+function loadDictionary(mode) {
+    const dictPath = mode === 'slang' ? 'data/dict-slang.json' : 'data/dict.json';
+
     try {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'dict.json', false); // false makes it synchronous
+        xhr.open('GET', dictPath, false); // false makes it synchronous
         xhr.send(null);
 
         if (xhr.status === 200 || xhr.status === 0) { // status 0 for file:// protocol
             emojiDict = JSON.parse(xhr.responseText);
             // Create reverse mapping for word to emoji
+            wordToEmojiDict = {};
             for (const emoji in emojiDict) {
                 const word = emojiDict[emoji];
                 wordToEmojiDict[word.toLowerCase()] = emoji;
             }
-            console.log('Dictionary loaded successfully:', Object.keys(emojiDict).length, 'emojis');
+            currentMode = mode;
+            console.log(`Dictionary loaded (${mode}):`, Object.keys(emojiDict).length, 'emojis');
+            return true;
         } else {
             console.error('Failed to load dictionary. Status:', xhr.status);
+            return false;
         }
     } catch (error) {
         console.error('Error loading dictionary:', error);
+        return false;
     }
 }
 
