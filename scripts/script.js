@@ -22,7 +22,7 @@ function loadDictionary(mode) {
 
     try {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'data/dict.json', false); // false makes it synchronous
+        xhr.open('GET', dictPath, false); // false makes it synchronous
         xhr.send(null);
 
         if (xhr.status === 200 || xhr.status === 0) { // status 0 for file:// protocol
